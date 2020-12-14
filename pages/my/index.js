@@ -1,15 +1,15 @@
 const app = getApp()
 
 Page({
-	data: {
-    balance:0,
-    freeze:0,
-    score:0,
-    score_sign_continuous:0
+  data: {
+    balance: 0,
+    freeze: 0,
+    score: 0,
+    score_sign_continuous: 0
   },
-	onLoad() {
-    
-	},	
+  onLoad() {
+
+  },
   onShow() {
     this.getUserInfo();
     this.setData({
@@ -18,35 +18,35 @@ Page({
     this.getUserApiInfo();
     this.getUserAmount();
     this.checkScoreSign();
-  },	
-  getUserInfo: function (cb) {
-      var that = this
-      wx.login({
-        success: function () {
-          wx.getUserInfo({
-            success: function (res) {
-              that.setData({
-                userInfo: res.userInfo
-              });
-            }
-          })
-        }
-      })
   },
-  allOrder(e){
-    var _id = e.currentTarget.dataset.id;
-    wx.navigateTo({
-      url: "/pages/order-list/index?id="+_id
+  getUserInfo: function (cb) {
+    var that = this
+    wx.login({
+      success: function () {
+        wx.getUserInfo({
+          success: function (res) {
+            that.setData({
+              userInfo: res.userInfo
+            });
+          }
+        })
+      }
     })
   },
-  aboutUs : function () {
+  allOrder(e) {
+    var _id = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: "/pages/order-list/index?id=" + _id
+    })
+  },
+  aboutUs: function () {
     wx.showModal({
       title: '关于我们',
       content: '单晓阳是你爹！！！！！！！！！！！！！',
-      showCancel:false
+      showCancel: false
     })
   },
-  getPhoneNumber: function(e) {
+  getPhoneNumber: function (e) {
     console.log(e.detail);
     if (!e.detail.errMsg || e.detail.errMsg != "getPhoneNumber:ok") {
       wx.showModal({
@@ -156,14 +156,14 @@ Page({
       }
     })
   },
-  relogin:function(){
+  relogin: function () {
     var that = this;
     app.globalData.token = null;
     app.login();
     wx.showModal({
       title: '提示',
       content: '重新登陆成功',
-      showCancel:false,
+      showCancel: false,
       success: function (res) {
         if (res.confirm) {
           that.onShow();
